@@ -1,0 +1,25 @@
+{% extends "header_footer.html" %}
+{% block content %}
+
+  <div class="row">
+    {% for i in rest %}
+
+    <div class="col-md-3 col-md-offset-1 panel panel-primary" style="margin-bottom:50px">
+          <div class="row text-center panel-heading" style="height:75px">
+              <h4>{{i.name}}</h4>
+          </div>
+          <div class="panel-body">
+            <center>
+              <a href='{{url_for('editRestaurant', restaurant_id = i.id) }}' id="btn1" class="btn btn-warning pull-left"> Edit </a>
+              <a href='{{url_for('deleteRestaurant', restaurant_id = i.id) }}'  class="btn btn-danger pull-right"> Delete </a>
+              <br><br><br>
+              <img src="{{i.picture}}" class="text-center img-circle" alt="{{i.name}}" width="100px" height="100">
+              <hr>
+              <a href='{{url_for('restaurantMenu', restaurant_id = i.id) }}' class="btn btn-primary"> View Menu </a>
+              <br><br>
+            <center>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+{% endblock %}

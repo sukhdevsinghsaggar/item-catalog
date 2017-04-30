@@ -1,0 +1,58 @@
+{% extends "header_footer.html" %}
+{% block content %}
+
+
+
+<div class="col-md-8 panel panel-primary" style="margin-bottom:50px;margin-left:17%; margin-right:17%">
+      <div class="panel-body text-center">
+  <h1>Add a new Restaurant in just 2 steps!</h1>
+  <hr>
+  <br>
+  <form class="form-horizontal" action="{{url_for('newRestaurant' )}}" method = 'POST' name="MyForm">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="picture">Image SRC:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="picture" placeholder="Enter URL" name="picture">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="">
+        <button type="button" class="btn btn-default" onclick="DisplayValue()">Click here to see how your Restaurant looks!</button>
+      </div>
+
+      <div id="view1" style="display:none ">
+        <h1 id="name1"><h1>
+          <img src="" id="img1" class="img-circle" height="100px" width="100px">
+      </div>
+
+    </div>
+    <div class="form-group">
+      <div class="">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+<script type="text/javascript" language="javascript">
+function DisplayValue(){
+    if(document.MyForm.name.value!=="" && document.MyForm.picture.value!== ""){
+
+      $("#view1").show();
+      document.getElementById('name1').innerHTML = document.MyForm.name.value;
+      document.getElementById("img1").src=document.MyForm.picture.value;
+
+    }
+    else{
+        alert("The text field empty!");
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "header_footer.html" %}
+{% block content %}
+
+        <div class="col-md-8 panel panel-primary" style="margin-bottom:50px;margin-left:17%; margin-right:17%">
+              <div class="panel-body text-center">
+          <h1>Add new Menu Item for {{ restaurant.name }}</h1>
+          <hr>
+          <br>
+          <form action="{{url_for('newMenuItem', restaurant_id=restaurant_id )}}" method = 'POST' class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="name">Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="description">Description:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="price">Price:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href = "{{url_for('restaurantMenu', restaurant_id= restaurant_id)}}" class ="btn btn-danger"> Cancel </a>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+
+{% endblock %}

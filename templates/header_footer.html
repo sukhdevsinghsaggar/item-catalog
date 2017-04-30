@@ -1,0 +1,128 @@
+
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/static/style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0px;
+  width: 100%;
+  color: white;
+  background: black;
+}
+
+body {
+    background: #e6f5ff;
+}
+
+div.jumbotron {
+    background: #00bfff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #0080ff, #00bfff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #0080ff, #00bfff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #0080ff, #00bfff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #00bfff, #003cb3); /* Standard syntax */
+    color: white;
+    width: 100%;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+</style>
+<script>
+$(document).ready(function(e) {
+    var $input = $('#refresh');
+
+    $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
+});
+</script>
+</head>
+
+
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-inverse" style="background:black">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <a class="navbar-brand" href="/" style="margin-left:20px"><b>Restaurant Explorer</b></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
+
+          {% if uname %}
+
+          <li><a href="/">Welcome, {{ uname }}!</a></li>
+
+          <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home </a></li>
+          <li><a href="/restaurant/new">New Restaurant</a></li>
+          <li><a href="/gdisconnect"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+          {% else %}
+          <li class="active "><a href="/"><span class="glyphicon glyphicon-home"></span> Home </a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="jumbotron" style="margin-top:20px; height:300px;">
+      <div class="container">
+        <center>
+          <br>
+          <h1>Restaurant Explorer</h1>
+          <h4>Browse through our exquisite restaurant catalog, view their menu and prices of items. </h4>
+        </center>
+        {% if userLoggedIn %}
+          <br>
+        <h4>Add your restaurant to our catalog.</h4>
+        <p><a class="btn btn-primary btn-lg" href="{{ url_for('newRestaurant') }}" role="button">Add Restaurant &#43;</a></p>
+        {% endif %}
+
+      </div>
+    </div>
+    <br>
+    <input type="hidden" id="refresh" value="no">
+
+                <div class ="container">
+                {% block content %}
+                {% endblock %}
+                </div>
+
+
+                <div class="footer">
+                        <div class="text-center container" style="padding-bottom:20px">
+                          <br>
+                            © Copyright 2017 Sukhdev Singh
+                          <br>
+                        </div>
+                </div>
+
+</body>
+</html>

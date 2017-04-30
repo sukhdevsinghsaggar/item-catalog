@@ -1,0 +1,76 @@
+
+{% extends "header_footer.html" %}
+{% block content %}
+  <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+
+<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+
+<!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+
+<br><br><br>
+<div class = "panel panel-primary text-center" style="margin-left:25%; margin-right:25%">
+<div class="panel-heading"><h1> Sign in </h1><br>Sign-in using Google!<br><br></div>
+<div class="panel-body">
+<!-- GOOGLE PLUS SIGN IN-->
+
+
+          <div id="signInButton" style="padding-top:30px; padding-bottom:25px">
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="145765104749-n8pco8mhvkjmr5dbl8v175skd1b9hehi.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
+        </div>
+
+<div id="result"></div>
+
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 4000);
+
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+
+  }); } }
+</script>
+
+
+<br>
+<em>Why don't we use our own login system?
+<br>
+Because this is more secure and easy to use!<br>
+</em>
+<!--END GOOGLE PLUS SIGN IN -->
+</div>
+</div>
+
+
+<br><br><br><br>
+
+  {% endblock %}

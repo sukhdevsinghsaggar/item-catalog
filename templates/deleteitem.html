@@ -1,0 +1,24 @@
+{% extends "header_footer.html" %}
+{% block content %}
+
+<div class="col-md-8 panel panel-primary" style="margin-bottom:50px;margin-left:17%; margin-right:17%">
+      <div class="panel-body">
+        <center>
+          <h1> Are you sure you want to delete {{item.name}}? </h1>
+          <hr>
+          <form action="{{ url_for('deleteMenuItem',restaurant_id = item.restaurant_id, menu_id=item.id)}}" method = 'post'>
+
+          <input type='submit', value = 'Delete' id="btn1" class ="btn btn-danger">
+
+          <a href = "{{ url_for('restaurantMenu', restaurant_id = item.restaurant_id)}}" id="btn2" class="btn btn-info"> Cancel </a>
+
+          </form>
+        </center>
+      </div>
+</div>
+
+
+
+
+
+{% endblock %}

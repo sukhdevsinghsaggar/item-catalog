@@ -1,0 +1,21 @@
+{% extends "header_footer.html"%}
+
+{% block content %}
+
+<div class="row">
+  {% for i in rest %}
+
+  <div class="col-md-3 col-md-offset-1 panel panel-primary" style="margin-bottom:50px">
+        <div class="row text-center panel-heading" style="height:75px" ><h4>{{i.name}}</h4></div>
+        <div class="panel-body">
+          <center>
+            <img src="{{i.picture}}" class="text-center img-circle" alt="{{i.name}}" width="100" height="100">
+            <hr>
+            <a href='{{url_for('restaurantMenu', restaurant_id = i.id) }}' class="btn btn-primary"> View Menu </a>
+          </center>
+        </div>
+      </div>
+
+  {% endfor %}
+</div>
+{% endblock %}

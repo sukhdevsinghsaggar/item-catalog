@@ -1,0 +1,37 @@
+{% extends "header_footer.html" %}
+{% block content %}
+
+    <div class="panel col-md-9 panel-primary" style="margin-left:12.5%; margin-right:12.5%">
+      <div class="row text-center panel-heading">
+        <a href='{{url_for('restaurantMenuJSON', restaurant_id = restaurant.id) }}' class="btn btn-default pull-right"> View JSON </a><br>
+        <h1>{{ restaurant.name }} </h1>
+        <br>
+        <img src="{{restaurant.picture}}" class="text-center img-circle" alt="{{restaurant.name}}" width="150" height="150">
+        <br><br>
+      </div>
+      <div class="text-center panel-body">
+
+        <h2>
+          Creator: {{ restaurant.user.name }} <br><br> <img src="{{restaurant.user.picture}}" class="text-center img-circle" alt="{{restaurant.name}}" width="100" height="100">
+        </h2>
+        <hr>
+        {% for i in items %}
+        <center>
+          <div class="col-md-4" style="padding-top:10px; padding-bottom:25px;margin-bottom:50px; margin-top:50px;margin-right:5%;margin-left:10%;border-style: solid;">
+          <div style="height:100px">
+            <h3>{{i.name}}</h3>
+          </div>
+          <br>
+          <b>Price:</b>
+          {{i.price}}
+          <br>
+          <br>
+          <div style="margin-bottom:0px;bottom:0">
+            <a href='{{url_for('viewMenuItem', restaurant_id = restaurant.id, menu_id = i.id) }}' id="btn1" class="btn btn-primary"> View </a>
+          </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+{% endblock %}
