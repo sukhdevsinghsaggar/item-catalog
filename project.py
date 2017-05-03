@@ -229,7 +229,7 @@ def menuItemJSON(restaurant_id, menu_id):
 def restaurants():
     rest = session.query(Restaurant).all()
     if 'username' not in login_session:
-        return render_template('homep.html', rest=rest)
+        return render_template('home_public.html', rest=rest)
     else:
         return render_template('home.html',
                                rest=rest, uname=login_session['username'])
